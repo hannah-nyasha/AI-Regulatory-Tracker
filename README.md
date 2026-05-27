@@ -85,18 +85,6 @@ Add a new regulatory source
   riskAreas: ["AI safety", "sector-specific rules", "voluntary commitments"],
 }
 ```
-Add a new company to track
-```js
-// In TRACKED_COMPANIES array
-{
-  ticker: "AI",
-  name: "C3.ai",
-  sector: "Enterprise AI Software",
-  aiExposure: "critical",
-  description: "Enterprise AI application software provider",
-  keyProducts: ["C3 AI Suite", "C3 Generative AI", "C3 AI CRM"],
-  regulatoryRisk: ["enterprise AI liability", "SEC AI disclosure", "data governance"],
-}
 ```
 ---
 Output Files
@@ -115,7 +103,7 @@ Architecture
 ```
 src/
 ├── agent.js       CLI entry point and orchestration
-├── config.js      Regulatory sources, companies, report settings
+├── config.js      Regulatory sources, report settings
 ├── researcher.js  Claude API calls with web_search for live research
 ├── reporter.js    Markdown and HTML report generation
 └── scheduler.js   node-cron weekly scheduler
@@ -130,8 +118,6 @@ agent.js
    ├── researchRegulatorySource() [×4 sources]
    │     └── Claude + web_search → JSON { developments[], trend, topRisk }
    │
-   ├── analyzeCompanyImpacts()
-   │     └── Claude (no search, uses findings above) → JSON { companyImpacts[] }
    │
    └── saveReport()
          └── generateMarkdownReport() + generateHtmlReport() → ./reports/
